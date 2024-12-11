@@ -43,3 +43,12 @@ exports.createIncome = (req, res) => {
     }
   });
 };
+
+exports.getIncomes = async (req, res) => {
+  try {
+    const incomes = await Income.find();
+    res.json(incomes);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
