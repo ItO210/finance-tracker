@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const categoryRoutes = require("./routes/categoryRoutes");
 const incomeRoutes = require("./routes/incomeRoutes");
+const expenseRoutes = require("./routes/expenseRoutes");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(cors(corsOptions));
 
 app.use("/", categoryRoutes);
 app.use("/", incomeRoutes);
+app.use("/", expenseRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
