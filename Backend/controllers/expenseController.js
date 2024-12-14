@@ -10,7 +10,8 @@ exports.createExpense = (req, res) => {
     }
 
     try {
-      const { description, amount, category, necessity, date } = req.body;
+      const { description, amount, category, necessity, installments, date } =
+        req.body;
 
       const files = req.files
         ? req.files.map((file) => ({
@@ -25,6 +26,7 @@ exports.createExpense = (req, res) => {
         category,
         date,
         necessity,
+        installments,
         files,
       });
 
@@ -69,10 +71,18 @@ exports.getExpenseById = async (req, res) => {
 exports.updateExpenseById = async (req, res) => {
   try {
     const expenseId = req.params.id;
-    const { description, amount, category, date, necessity, files } = req.body;
+    const {
+      description,
+      amount,
+      category,
+      date,
+      necessity,
+      installments,
+      files,
+    } = req.body;
     const updatedExpense = await Expense.findByIdAndUpdate(
       expenseId,
-      { description, amount, category, date, necessity, files },
+      { description, amount, category, date, necessity, installments, files },
       { new: true }
     );
     res

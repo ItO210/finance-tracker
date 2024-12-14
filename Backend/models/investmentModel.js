@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const expenseSchema = new Schema({
+const investmentSchema = new Schema({
   description: {
     type: String,
     required: true,
@@ -15,17 +15,15 @@ const expenseSchema = new Schema({
     ref: "Category",
     required: true,
   },
-  date: {
+  startDate: {
     type: Date,
     default: Date.now,
   },
-  necessity: {
-    type: Boolean,
-    required: true,
+  endDate: {
+    type: Date,
   },
-  installments: {
+  interestRate: {
     type: Number,
-    default: 0,
   },
   files: [
     {
@@ -35,4 +33,4 @@ const expenseSchema = new Schema({
   ],
 });
 
-module.exports = mongoose.model("Expense", expenseSchema);
+module.exports = mongoose.model("Investment", investmentSchema);
