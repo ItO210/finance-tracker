@@ -81,10 +81,9 @@ const CardCarousel = () => {
             }}
           >
             <div
-              className={`m-2 w-full h-full items-center justify-center flex rounded-3xl ${
+              className={`m-2 w-full h-full items-center justify-center flex rounded-3xl bg-neutral-400 shadow-lg ${
                 index === 2 ? "scale-100" : "scale-90"
               } transition-transform`}
-              style={{ backgroundColor: card.color }}
             >
               {card.name}
             </div>

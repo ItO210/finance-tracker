@@ -6,6 +6,7 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const incomeRoutes = require("./routes/incomeRoutes");
 const expenseRoutes = require("./routes/expenseRoutes");
 const investmentRoutes = require("./routes/investmentRoutes");
+const cardRoutes = require("./routes/cardRoutes");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/", categoryRoutes);
 app.use("/", incomeRoutes);
 app.use("/", expenseRoutes);
 app.use("/", investmentRoutes);
+app.use("/", cardRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
