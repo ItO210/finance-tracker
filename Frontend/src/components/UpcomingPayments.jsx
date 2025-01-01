@@ -27,7 +27,7 @@ const UpcomingPayments = () => {
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden">
-      <h1 className="w-full p-2 border text-center">Recent Transactions</h1>
+      <h1 className="w-full p-2 text-center">Upcoming Payments</h1>
       <ul className="flex w-full overflow-scroll p-2">
         {transactions.map((item) => (
           <li

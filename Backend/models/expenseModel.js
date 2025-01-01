@@ -15,9 +15,12 @@ const expenseSchema = new Schema({
     ref: "Category",
     required: true,
   },
-  date: {
+  startDate: {
     type: Date,
     default: Date.now,
+  },
+  endDate: {
+    type: Date,
   },
   necessity: {
     type: Boolean,
