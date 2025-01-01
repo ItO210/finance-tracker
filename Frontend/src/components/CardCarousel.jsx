@@ -1,10 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CardCarousel = () => {
-  const cards = [{ id: 1, name: "card1", color: "#ee4035" }];
+  const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [direction, setDirection] = useState("");
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/cards", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setCards(data.cards); // Extract the cards array from the response
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchCards();
+  }, []);
 
   const handleTransition = (direction) => {
     if (transitioning) return;
@@ -24,7 +46,15 @@ const CardCarousel = () => {
     }, 300);
   };
 
-  // Ensure exactly 5 cards are displayed by repeating them
+  // Only proceed if there are cards in the array
+  if (cards.length === 0) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <p>Loading cards...</p>
+      </div>
+    );
+  }
+
   const numCards = 5;
   const totalCards = cards.length;
 
@@ -34,24 +64,19 @@ const CardCarousel = () => {
     cards[(currentIndex - 1 + totalCards) % totalCards],
   ];
 
-  // Get current card
   const currentCard = cards[currentIndex];
 
-  // Get next 2 cards, ensuring indices are valid
   const nextCards = [
     cards[(currentIndex + 1) % totalCards],
     cards[(currentIndex + 2) % totalCards],
   ];
 
-  // Combine and repeat the cards to display exactly 5 cards
   let visibleCards = [...prevCards, currentCard, ...nextCards];
 
-  // Repeat the cards if there are fewer than 5
   while (visibleCards.length < numCards) {
     visibleCards = [...visibleCards, ...cards];
   }
 
-  // Slice the array to ensure exactly 5 cards are shown
   visibleCards = visibleCards.slice(0, numCards);
 
   return (
@@ -69,7 +94,7 @@ const CardCarousel = () => {
       >
         {visibleCards.map((card, index) => (
           <div
-            key={`${card.id}-${index}`} // Ensure unique key by appending index
+            key={`${card.id}-${index}`}
             className={`flex items-center justify-center shrink-0 w-2/3 h-2/3 rounded-3xl`}
             style={{
               transform: transitioning
@@ -81,11 +106,9 @@ const CardCarousel = () => {
             }}
           >
             <div
-              className={`m-2 w-full h-full items-center justify-center flex rounded-3xl bg-neutral-400 shadow-lg ${
-                index === 2 ? "scale-100" : "scale-90"
-              } transition-transform`}
+              className={`m-2 w-full h-full items-center justify-center flex rounded-3xl bg-neutral-400 shadow-lg`}
             >
-              {card.name}
+              {card.bankName}
             </div>
           </div>
         ))}

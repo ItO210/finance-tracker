@@ -1,4 +1,7 @@
+import AChart from "./AChart";
 import CardCarousel from "./CardCarousel";
+import TransactionList from "./TransactionList";
+import UpcomingPayments from "./UpcomingPayments";
 
 const Dashboard = () => {
   return (
@@ -7,13 +10,13 @@ const Dashboard = () => {
         <CardCarousel />
       </div>
       <div className="col-span-4 row-span-6 border rounded-lg">
-        THIS WILL BE GRAPHS
+        <AChart />
       </div>
       <div className="col-span-4 row-span-4 border rounded-lg">
-        THIS WILL BE RECENT TRANSACTIONS
+        <TransactionList />
       </div>
       <div className="col-span-4 row-span-2 border rounded-lg">
-        THIS WILL BE UPCOMING PYMENTS
+        <UpcomingPayments />
       </div>
     </div>
   );

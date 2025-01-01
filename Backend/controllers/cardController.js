@@ -43,7 +43,7 @@ exports.getCardById = async (req, res) => {
 
 exports.getAllCards = async (req, res) => {
   try {
-    const cards = await Cards.find();
+    const cards = await Card.find();
     res.status(200).json({ message: "Cards Fetched Successfully", cards });
   } catch (error) {
     res

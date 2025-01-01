@@ -7,6 +7,7 @@ const incomeRoutes = require("./routes/incomeRoutes");
 const expenseRoutes = require("./routes/expenseRoutes");
 const investmentRoutes = require("./routes/investmentRoutes");
 const cardRoutes = require("./routes/cardRoutes");
+const transactionsController = require("./routes/transactionsRoutes");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 mongoose
   .connect("mongodb://localhost:27017/finance-tracker")
+  //mongodb://192.168.100.4:27017
   .then(() => {
     console.log("Database Connected");
   })
@@ -33,6 +35,7 @@ app.use("/", incomeRoutes);
 app.use("/", expenseRoutes);
 app.use("/", investmentRoutes);
 app.use("/", cardRoutes);
+app.use("/", transactionsController);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

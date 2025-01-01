@@ -3,7 +3,7 @@ const router = express.Router();
 const investmentController = require("../controllers/investmentController");
 
 router.post("/investment", investmentController.createInvestment);
-router.get("/investment", investmentController.getInvestments);
+router.get("/investments", investmentController.getInvestments);
 router.get("/investment/:id", investmentController.getInvestmentById);
 router.put("investment/:id", investmentController.updateInvestmentById);
 router.delete("/investment/:id", investmentController.deleteInvestmentById);
