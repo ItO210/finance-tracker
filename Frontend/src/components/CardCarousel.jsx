@@ -86,16 +86,13 @@ const CardCarousel = () => {
         <button onClick={() => handleTransition("Next")}>Next</button>
       </div>
 
-      <div
-        className="flex w-full h-full justify-center items-center overflow-hidden"
-        style={{
-          transition: "transform 0.3s ease",
-        }}
-      >
+      <div className="flex w-full h-full justify-center items-center overflow-hidden">
         {visibleCards.map((card, index) => (
           <div
             key={`${card.id}-${index}`}
-            className={`flex items-center justify-center shrink-0 w-2/3 h-2/3 rounded-3xl`}
+            className={`flex items-center justify-center shrink-0 w-2/3 h-2/3 rounded-3xl ${
+              transitioning === false && index === 2 && "w-[80%] h-[80%] z-10"
+            }`}
             style={{
               transform: transitioning
                 ? direction === "Next"
@@ -103,6 +100,13 @@ const CardCarousel = () => {
                   : "translateX(100%)"
                 : "translateX(0)",
               transition: transitioning && "transform 0.3s ease",
+            }}
+            onClick={() => {
+              if (index === 1) {
+                handleTransition("Prev");
+              } else if (index === 3) {
+                handleTransition("Next");
+              }
             }}
           >
             <div

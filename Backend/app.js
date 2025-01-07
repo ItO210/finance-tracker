@@ -8,6 +8,7 @@ const expenseRoutes = require("./routes/expenseRoutes");
 const investmentRoutes = require("./routes/investmentRoutes");
 const cardRoutes = require("./routes/cardRoutes");
 const transactionsController = require("./routes/transactionsRoutes");
+const upcomingPaymentController = require("./routes/upcomingPaymentRoutes");
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use("/", expenseRoutes);
 app.use("/", investmentRoutes);
 app.use("/", cardRoutes);
 app.use("/", transactionsController);
+app.use("/", upcomingPaymentController);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

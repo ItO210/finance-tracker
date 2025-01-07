@@ -21,6 +21,7 @@ const expenseSchema = new Schema({
   },
   endDate: {
     type: Date,
+    required: true,
   },
   necessity: {
     type: Boolean,

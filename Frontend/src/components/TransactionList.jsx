@@ -25,6 +25,15 @@ const TransactionList = () => {
     fetchTransactions();
   }, []);
 
+  const formatDate = (dateString) => {
+    const dateObj = new Date(dateString);
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0"); // Adds leading zero
+    const day = String(dateObj.getDate()).padStart(2, "0"); // Adds leading zero
+
+    return `${month}/${day}/${year}`;
+  };
+
   return (
     <div className="w-full h-full flex flex-col overflow-hidden">
       <h1 className="w-full p-2 text-center">Recent Transactions</h1>
@@ -35,7 +44,7 @@ const TransactionList = () => {
             key={item._id}
           >
             <p>{item.description}</p>
-            <p>{item.date || item.startDate}</p>
+            <p>{formatDate(item.date || item.startDate)}</p>
             <p>{item.amount}</p>
           </li>
         ))}
