@@ -4,10 +4,10 @@ const Investment = require("../models/investmentModel");
 
 exports.getTransactions = async (req, res) => {
   try {
-    const { limit = 10, lastDate } = req.body;
+    const { limit = 5, lastDate } = req.body;
 
     // Parse limit and lastDate
-    const parsedLimit = parseInt(limit, 10);
+    const parsedLimit = parseInt(limit);
     const parsedLastDate = lastDate ? new Date(lastDate) : new Date();
 
     // Fetch entries from all collections

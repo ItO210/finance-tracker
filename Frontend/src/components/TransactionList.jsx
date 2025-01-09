@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const TransactionList = () => {
+const TransactionList = (limit) => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
@@ -11,6 +11,7 @@ const TransactionList = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          body: JSON.stringify(limit),
         });
         if (!response.ok) {
           throw new Error("Network response was not ok");

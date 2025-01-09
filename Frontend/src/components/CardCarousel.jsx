@@ -81,17 +81,12 @@ const CardCarousel = () => {
 
   return (
     <div className="w-full h-full flex items-center justify-center flex-col">
-      <div>
-        <button onClick={() => handleTransition("Prev")}>Prev</button>
-        <button onClick={() => handleTransition("Next")}>Next</button>
-      </div>
-
       <div className="flex w-full h-full justify-center items-center overflow-hidden">
         {visibleCards.map((card, index) => (
           <div
             key={`${card.id}-${index}`}
             className={`flex items-center justify-center shrink-0 w-2/3 h-2/3 rounded-3xl ${
-              transitioning === false && index === 2 && "w-[80%] h-[80%] z-10"
+              transitioning === false && index === 2 && "w-[80%] h-[80%]"
             }`}
             style={{
               transform: transitioning
