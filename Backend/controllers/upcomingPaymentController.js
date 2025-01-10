@@ -1,7 +1,6 @@
 const RecurringPayment = require("../models/recurringPaymentModel");
 const Expense = require("../models/expenseModel");
 
-// Function to compute the next occurrence based on frequency
 const computeNextOccurrence = (currentDate, frequency) => {
   const nextDate = new Date(currentDate);
 
@@ -56,33 +55,21 @@ exports.getUpcomingPayments = async (req, res) => {
       $or: [{ endDate: { $gte: now } }, { endDate: null }],
     });
 
-    // Calculate the next installment date for expenses
+    // Get the next installment date from the installmentDates array
     const upcomingExpenses = expenses
       .map((expense) => {
-        const { startDate, endDate, installments } = expense;
+        const { installmentDates } = expense;
 
-        const totalMonthsSinceStart = Math.floor(
-          (now - new Date(startDate)) / (1000 * 60 * 60 * 24 * 30)
+        // Find the next installment date that is greater than or equal to the current date
+        const nextInstallmentDate = installmentDates.find(
+          (date) => new Date(date) >= now
         );
 
-        const nextInstallmentMonth = totalMonthsSinceStart + 1;
-
-        if (installments && nextInstallmentMonth > installments) return null;
-
-        const nextInstallmentDate = new Date(startDate);
-        nextInstallmentDate.setMonth(
-          nextInstallmentDate.getMonth() + nextInstallmentMonth
-        );
-
-        if (
-          nextInstallmentDate < now ||
-          (endDate && nextInstallmentDate > endDate)
-        )
-          return null;
+        if (!nextInstallmentDate) return null;
 
         return {
           ...expense.toObject(),
-          nextDate: nextInstallmentDate,
+          nextDate: new Date(nextInstallmentDate),
         };
       })
       .filter(Boolean);

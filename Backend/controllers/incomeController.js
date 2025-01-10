@@ -13,7 +13,7 @@ exports.createIncome = (req, res) => {
 
     try {
       // Extract data from the request body
-      const { description, amount, category, date } = req.body;
+      const { description, amount, category, card, date } = req.body;
 
       // Check if files were uploaded
       const files = req.files
@@ -28,6 +28,7 @@ exports.createIncome = (req, res) => {
         description,
         amount,
         category,
+        card,
         date,
         files,
       });
@@ -70,10 +71,10 @@ exports.getIncomeById = async (req, res) => {
 exports.updateIncomeById = async (req, res) => {
   try {
     const incomeId = req.params.id;
-    const { description, amount, category, date, files } = req.body;
+    const { description, amount, category, card, date, files } = req.body;
     const updatedIncome = await Income.findByIdAndUpdate(
       incomeId,
-      { description, amount, category, date, files },
+      { description, amount, category, card, date, files },
       { new: true }
     );
     res

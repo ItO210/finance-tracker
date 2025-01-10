@@ -15,6 +15,11 @@ const investmentSchema = new Schema({
     ref: "Category",
     required: true,
   },
+  card: {
+    type: Schema.Types.ObjectId,
+    ref: "Card",
+    required: true,
+  },
   startDate: {
     type: Date,
     default: Date.now,

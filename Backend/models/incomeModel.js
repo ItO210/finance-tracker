@@ -15,6 +15,11 @@ const incomeSchema = new Schema({
     ref: "Category",
     required: true,
   },
+  card: {
+    type: Schema.Types.ObjectId,
+    ref: "Card",
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

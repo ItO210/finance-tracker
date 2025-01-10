@@ -22,7 +22,5 @@ router.delete(
   "/recurringPayment/:id",
   recurringPaymentController.deleteRecurringPaymentById
 );
-router.get(
-  "/upcomingRecurringPayments",
-  recurringPaymentController.getUpcomingRecurringPayments
-);
+
+module.exports = router;

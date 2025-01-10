@@ -31,7 +31,7 @@ const recurringPaymentSchema = new Schema({
   },
   nextOccurrence: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
 });
 

@@ -15,21 +15,24 @@ const expenseSchema = new Schema({
     ref: "Category",
     required: true,
   },
+  card: {
+    type: Schema.Types.ObjectId,
+    ref: "Card",
+    required: true,
+  },
   startDate: {
     type: Date,
     default: Date.now,
   },
   endDate: {
     type: Date,
-    required: true,
   },
   necessity: {
     type: Boolean,
     required: true,
   },
-  installments: {
-    type: Number,
-    default: 0,
+  installmentDates: {
+    type: [Date],
   },
   files: [
     {
@@ -39,4 +42,5 @@ const expenseSchema = new Schema({
   ],
 });
 
+// Export the model
 module.exports = mongoose.model("Expense", expenseSchema);
